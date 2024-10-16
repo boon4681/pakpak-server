@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlookPak</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/alpinejs" defer></script>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body class="flex w-screen overflow-x-hidden">
+    <div class="menu sticky top-0 left-0 text-sm">
+        <div class="logo"></div>
+        <button class="button home dark" onclick="location.href='/'"></button>
+        <button class="button graph" onclick="location.href='/graph'"></button>
+    </div>
+    <div class="flex justify-center flex-col items-center md:flex-row w-full gap-4 py-6">
+        <div id="F" class="w-[400px] flex flex-col py-6 rounded-2xl bg-white gap-2 px-6">
+
+        </div>
+    </div>
+    <script>
+        const data = async () => {
+            const data = await fetch("http://" + location.host + "/history", { method: 'get' }).then(a => a.json())
+            document.getElementById("F").innerHTML = data.map(a =>
+                `
+                <div class="flex flex-col">
+                    <div class="text-sm">${new Intl.DateTimeFormat('en-US', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                    hour12: false
+                }).format(new Date(a.dateTime))}</div>
+                    <div class="flex gap-4">
+                        <div>Hm: ${a.Hm.toFixed(2)}%</div>
+                        <div>DHm: ${a.DHm.toFixed(2)}</div>
+                        <div>Lm:${a.Lm.toFixed(2)}</div>
+                        <div>T: ${a.temp.toFixed(2)}°C</div>
+                    </div>
+                </div>
+                `).join("")
+        }
+        data()
+        document.addEventListener('alpine:init', () => {
+            setInterval(() => {
+                data()
+            }, 1000)
+        })
+    </script>
+</body>
+
+</html>

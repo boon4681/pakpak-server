@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PlookPak</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/alpinejs" defer></script>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body class="flex w-screen overflow-x-hidden" style="--Hm:'HI'">
+    <div class="menu sticky top-0 left-0">
+        <div class="logo"></div>
+        <button class="button home" onclick="location.href='/'"></button>
+        <button class="button graph dark" onclick="location.href='/graph'"></button>
+    </div>
+    <div class="flex justify-center flex-col items-center md:flex-row w-full gap-4 py-6">
+        <div class="w-[400px] flex flex-col py-6 rounded-2xl bg-white gap-4 px-6">
+            <div class="flex flex-col w-full">
+                Plant Stats
+                <div class="camera mt-0">
+                    <div class="flex">
+                        <div x-data class="flex justify-center items-center w-[400px] h-[300px]">
+                            <div x-data class="absolute" x-show="!$store.camera">
+                                <button @click="connect()"
+                                    class="px-4 py-1 bg-blue-500 rounded text-white">Connect</button>
+                            </div>
+                            <img id="cam" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="flex gap-4 flex-wrap">
+                    <div class="w-[160px] h-10 bg-neutral-200 rounded-md overflow-hidden relative Hm">
+                        <div class="h-12 bg-blue-500" style="width: calc(var(--v-Hm) * 1%);"></div>
+                    </div>
+                    <div class="w-[160px] h-10 bg-neutral-200 rounded-md overflow-hidden relative DHm">
+                        <div class="h-12 bg-stone-700" style="width: calc(var(--v-DHm) * 1%);"></div>
+                    </div>
+                    <div class="w-[160px] h-10 bg-neutral-200 rounded-md overflow-hidden relative Lm">
+                        <div class="h-12 bg-amber-500" style="width: calc(var(--v-Lm) * 1% * 0.2);"></div>
+                    </div>
+                    <div class="w-[160px] h-10 bg-neutral-200 rounded-md overflow-hidden relative temp">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        let ws = undefined
+        let frame = ""
+        const cam = document.getElementById('cam')
+        const connect = () => {
+            if (ws == undefined) {
+                ws = new WebSocket("ws://" + location.host + "/")
+                ws.onmessage = (evt) => {
+                    const data = evt.data
+                    if (data == 'no signal') {
+                        cam.src = ""
+                        Alpine.store('camera', false)
+                    } else {
+                        cam.src = 'data:image/jpeg;base64, ' + data
+                        Alpine.store('camera', true)
+                    }
+                }
+                ws.onclose = () => {
+                    cam.src = ""
+                    Alpine.store('camera', false)
+                    ws = undefined
+                }
+            }
+        }
+        const data = async () => {
+            const data = await fetch("http://" + location.host + "/now", { method: 'get' }).then(a => a.json())
+            for (const key of Object.keys(data)) {
+                document.documentElement.style.setProperty("--v-" + key, data[key].toFixed(2) + "")
+                document.documentElement.style.setProperty("--s-" + key, JSON.stringify(data[key].toFixed(2) + ""))
+            }
+        }
+        data()
+        document.addEventListener('alpine:init', () => {
+            Alpine.store('camera', false)
+            connect()
+            setInterval(() => {
+                data()
+            }, 1000)
+        })
+    </script>
+    <style>
+        .Hm::before {
+            content: "Hm: " var(--s-Hm)"%";
+            padding: 8px 20px;
+            font-weight: 600;
+            color: white;
+            position: absolute;
+        }
+
+        .DHm::before {
+            content: "D-Hm: " var(--s-DHm)"%";
+            padding: 8px 20px;
+            font-weight: 600;
+            color: white;
+            position: absolute;
+        }
+
+        .Lm::before {
+            content: "Lm: " var(--s-Lm);
+            padding: 8px 20px;
+            font-weight: 600;
+            color: black;
+            position: absolute;
+        }
+
+        .temp::before {
+            content: "Temp: " var(--s-temp)"°C";
+            padding: 8px 20px;
+            font-weight: 600;
+            color: black;
+            position: absolute;
+        }
+    </style>
+</body>
+
+</html>

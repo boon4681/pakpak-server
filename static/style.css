@@ -1,0 +1,352 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #252525;
+
+}
+
+.flexbox {
+    display: flex;
+    width: 100%;
+}
+
+/*----- menu -------*/
+
+.menu {
+    background-image: url('image/10.png');
+    background-size: cover;
+    width: 100px;
+    height: 100vh;
+
+    .logo {
+        width: 100%;
+        height: 100px;
+        background-image: url('image/image.png');
+        background-position: center;
+        background-size: cover;
+    }
+
+    .button {
+        position: relative;
+        background-color: #FFFFFF;
+        width: 60px;
+        height: 60px;
+        border-radius: 10px;
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+    }
+
+    .home {
+        background-image: url('image/logo-home.png');
+        background-size: cover;
+    }
+
+    .graph {
+        background-image: url('image/logo-graph.png');
+        background-size: cover;
+    }
+
+    .dark {
+        background-color: hsla(208, 100%, 97%, 0.36);
+    }
+
+}
+
+/*----- box item 1 -------*/
+
+.container-c1 {
+    display: flex;
+    width: 400px;
+    height: 480px;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: white;
+    border-radius: 20px;
+
+    .camera {
+        background-image: url('image/camera.png');
+        background-position: center;
+        background-size: cover;
+        border-radius: 10px;
+        width: 350px;
+        height: 250px;
+        margin-top: 20px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .sunshow {
+        background-image: url('image/sunshow.png');
+        background-position: center;
+        background-size: cover;
+        width: 282px;
+        height: 35px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /*-------Progress box 1-------*/
+    .progress-p1 {
+        position: relative;
+        width: 150px;
+        height: 50px;
+        background: hsla(0, 0%, 82%, 0.44);
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 30;
+        margin-left: auto;
+    }
+
+    .progress-fill-1 {
+        width: 50%;
+        height: 100%;
+        background: #3A89FF;
+    }
+
+    .progress-text {
+        position: absolute;
+        top: 50%;
+        right: 5px;
+        transform: translateY(-50%);
+        color: rgb(36, 36, 36);
+    }
+
+    .progress-image {
+        position: absolute;
+        width: 30px;
+        height: 50%;
+        background-image: url('image/water01.png');
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        margin-left: 15px;
+        margin-top: 12px;
+
+
+    }
+
+    .progress-p2 {
+        position: relative;
+        width: 150px;
+        height: 50px;
+        background: hsla(0, 0%, 82%, 0.44);
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: 30;
+        margin-left: 20px;
+        margin-right: auto;
+    }
+
+    .progress-fill-2 {
+        width: 25%;
+        height: 100%;
+        background: #AA6122;
+    }
+
+}
+
+/*---------box item 2-----------*/
+.container-c2 {
+    display: flex;
+    height: 480px;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: white;
+    border-radius: 20px;
+
+    .box-main {
+        background: #BBF9FC;
+        width: 150px;
+        height: 250px;
+        border-radius: 10px;
+        background-image: url('image/01.png');
+        background-size: cover;
+        margin-top: 20px;
+        margin-left: auto;
+
+    }
+
+    /*-------Progress box 2-------*/
+    .progress-temp-t1 {
+        position: relative;
+        width: 40px;
+        height: 250px;
+        background: hsla(0, 0%, 82%, 0.44);
+        border-radius: 10px;
+        overflow: hidden;
+        margin-top: 20px;
+        margin-left: 20px;
+        margin-right: 10px;
+    }
+
+    .temp-image1 {
+        position: absolute;
+        width: 25px;
+        height: 30px;
+        background-image: url('image/sun.png');
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        bottom: 10px;
+        left: 8px;
+        z-index: 1;
+
+    }
+
+    .progress-fill-3 {
+        position: absolute;
+        width: 100%;
+        height: 20%;
+        background: #FFB03A;
+        bottom: 0;
+        z-index: 0;
+    }
+
+    .progress-temp-t2 {
+        position: relative;
+        width: 40px;
+        height: 250px;
+        background: hsla(0, 0%, 82%, 0.44);
+        border-radius: 10px;
+        overflow: hidden;
+        margin-top: 20px;
+        margin-right: auto;
+    }
+
+    .temp-image2 {
+        position: absolute;
+        width: 25px;
+        height: 30px;
+        background-image: url('image/temo.png');
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        bottom: 10px;
+        left: 8px;
+        z-index: 1;
+
+    }
+
+    .progress-fill-4 {
+        position: absolute;
+        width: 100%;
+        height: 25%;
+        background: #3DBE6A;
+        bottom: 0;
+        z-index: 0;
+    }
+
+    /*-------Status-------*/
+    .value {
+        display: flex;
+        position: absolute;
+        width: 260px;
+        height: 20px;
+        margin-top: 275px;
+        justify-content: end;
+
+        .text-temp {
+            margin-top: 0;
+            font-size: 15px;
+            margin-right: 5px;
+            margin-left: 8px;
+        }
+    }
+
+
+    .status {
+        background-image: url('image/tree.png');
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        width: 260px;
+        height: 60px;
+        margin-top: 30px;
+    }
+
+    .button-water {
+        background-color: #408CFF;
+        width: 250px;
+        height: 60px;
+        margin-bottom: 15px;
+        border-radius: 10px;
+        border: 0;
+
+        .text-water {
+            color: azure;
+            font-size: 20px;
+            text-decoration: none;
+        }
+
+    }
+
+}
+
+/*--------graph.html-----------*/
+.container {
+    display: flex;
+    width: calc(100% - 100px);
+    ;
+    height: 100vh;
+    flex-direction: column;
+
+    .container-c3 {
+        display: flex;
+        width: 600px;
+        height: 300px;
+        flex-wrap: wrap;
+        justify-content: center;
+        background-image: url('image/graph.png');
+        background-position: center;
+        background-size: contain;
+        background-repeat: no-repeat;
+        border-radius: 16px;
+        margin: auto;
+        margin-top: 50px;
+
+    }
+
+    .container-c4 {
+        display: flex;
+        flex-direction: column;
+        width: 600px;
+        height: 500px;
+        flex-wrap: wrap;
+        justify-content: center;
+        background-color: #FFFFFF;
+        border-radius: 16px;
+        margin: auto;
+        margin-top: 20px;
+        margin-bottom: 40px;
+
+        .box {
+            display: flex;
+
+            background-color: #F3F3F3;
+            width: 450px;
+            height: 50px;
+            margin: auto;
+            margin-top: 6px;
+            margin-bottom: 6px;
+            border-radius: 10px;
+            justify-content: space-between;
+
+
+        }
+
+        .box-text {
+            font-size: small;
+            color: #252525;
+            margin: auto;
+        }
+
+    }
+
+}
