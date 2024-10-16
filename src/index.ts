@@ -91,7 +91,7 @@ app.get('/history', async (c) => {
   return c.json(rows);
 });
 
-const port = 3000
+const port = 6190
 console.log(`Server is running on port ${port}`)
 
 const server = serve({
