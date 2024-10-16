@@ -55,7 +55,7 @@
         const cam = document.getElementById('cam')
         const connect = () => {
             if (ws == undefined) {
-                ws = new WebSocket("ws://" + location.host + "/")
+                ws = new WebSocket("wss://plookpak.boon4681.com/")
                 ws.onmessage = (evt) => {
                     const data = evt.data
                     if (data == 'no signal') {
