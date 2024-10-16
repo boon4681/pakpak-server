@@ -74,7 +74,7 @@
             }
         }
         const data = async () => {
-            const data = await fetch("http://" + location.host + "/now", { method: 'get' }).then(a => a.json())
+            const data = await fetch(location.origin + "/now", { method: 'get' }).then(a => a.json())
             for (const key of Object.keys(data)) {
                 document.documentElement.style.setProperty("--v-" + key, data[key].toFixed(2) + "")
                 document.documentElement.style.setProperty("--s-" + key, JSON.stringify(data[key].toFixed(2) + ""))

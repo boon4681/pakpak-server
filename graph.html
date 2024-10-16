@@ -23,7 +23,7 @@
     </div>
     <script>
         const data = async () => {
-            const data = await fetch("http://" + location.host + "/history", { method: 'get' }).then(a => a.json())
+            const data = await fetch(location.origin + "/history", { method: 'get' }).then(a => a.json())
             document.getElementById("F").innerHTML = data.map(a =>
                 `
                 <div class="flex flex-col">
